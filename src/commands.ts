@@ -41,17 +41,22 @@ export const createCommands = (commandProps: CreateCommandProps): { [key: string
   const channel = new Channel(workspaceState)
 
   const start = async () => {
-    if (webview && webview.state.loaded) {
-      webview.createOrShow()
-    } else {
-      // activate machine
-      webview = await createWebView({
-        extensionPath,
-        channel,
-      })
-      // make send to client function exportable
-      // as "send".
-      sendToClient = webview.send
+    try {
+      if (webview && webview.state?.loaded) {
+        webview.createOrShow()
+      } else {
+        // activate machine
+        webview = await createWebView({
+          extensionPath,
+          channel,
+        })
+        // make send to client function exportable
+        // as "send".
+        sendToClient = webview?.send || sendToClient
+      }
+    } catch (err) {
+      logger(`Failed to start CodeRoad: ${err}`)
+      vscode.window.showErrorMessage(`CodeRoad could not start: ${err}`)
     }
   }
 

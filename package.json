@@ -1,6 +1,9 @@
 {
   "name": "coderoad",
-  "version": "0.19.4",
+  "version": "0.20.0",
+  "sponsor": {
+    "url": "https://www.patreon.com/eldertek"
+  },
   "description": "Play interactive coding tutorials in your editor",
   "keywords": [
     "tutorial",
@@ -71,9 +74,10 @@
     "vscode-test": "^1.6.1"
   },
   "engines": {
-    "vscode": "^1.39.2"
+    "vscode": "^1.85.0"
   },
   "activationEvents": [
+    "onStartupFinished",
     "onCommand:coderoad.start",
     "workspaceContains:*/codeally.json",
     "workspaceContains:*/codeAlly.json",

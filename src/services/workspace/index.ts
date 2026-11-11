@@ -11,11 +11,15 @@ export const openWorkspace = () => {
 }
 
 export const checkWorkspaceEmpty = async () => {
-  let files
+  const root = getWorkspaceRoot() || env.WORKSPACE_ROOT
+  if (!root) {
+    return true
+  }
+  let files: string[] = []
   try {
-    files = await readDir(env.WORKSPACE_ROOT, { encoding: 'utf8' })
+    files = await readDir(root, { encoding: 'utf8' })
   } catch (error) {
-    throw new Error('Failed to check workspace')
+    return false
   }
   return files.length === 0
 }

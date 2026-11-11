@@ -35,11 +35,6 @@ export const activate = (vscodeExt: vscode.ExtensionContext): void => {
 
   onDeactivate = () => {
     // cleanup subscriptions/tasks
-    // handled within activate because it requires access to subscriptions
-    for (const disposable of vscodeExt.subscriptions) {
-      disposable.dispose()
-    }
-
     telemetry.deactivate()
   }
 }
